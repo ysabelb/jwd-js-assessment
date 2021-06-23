@@ -25,6 +25,7 @@ window.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#quizBlock').style.display = 'block';
     start.style.display = 'none';
   });
+
   // quizArray QUESTIONS & ANSWERS
   // q = QUESTION, o = OPTIONS, a = CORRECT ANSWER
   // Basic ideas from https://code-boxx.com/simple-javascript-quiz/
@@ -37,16 +38,27 @@ window.addEventListener('DOMContentLoaded', () => {
     {
       q: 'Which is the largest ocean on Earth?',
       o: ['Atlantic Ocean', 'Indian Ocean', 'Arctic Ocean', 'Pacific Ocean'],
-      a: 3,
+      a: 3, // array index 3 - so Pacific Ocean is the correct answer here
     },
     {
       q: 'What is the capital of Australia',
       o: ['Sydney', 'Canberra', 'Melbourne', 'Perth'],
-      a: 1,
+      a: 1, // array index 1 - so Canberra is the correct answer here
+    },
+    // 3. Add 2 more questions to the app
+    {
+      q: 'What are a group of Dolphins called',
+      o: ['School', 'Herd', 'Pod', 'Pool'],
+      a: 2,// array index 2 - so Pod is the correct answer here
+    },
+    {
+      q: 'Which planet is known as the Morning Star or the Evening Star',
+      o: ['Venus', 'Saturn', 'Neptune', 'Uranus'],
+      a: 0, // array index 0 - so Venus is the correct answer here
     },
   ];
 
-  // function to Display the quiz questions and answers from the object
+  // function to Display the quiz questions and answers 
   const displayQuiz = () => {
     const quizWrap = document.querySelector('#quizWrap');
     let quizDisplay = '';
@@ -63,11 +75,11 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  // Calculate the score
+  // 1. Calculate the score 
   const calculateScore = () => {
     let score = 0;
     quizArray.map((quizItem, index) => {
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 4; i++) { 
         //highlight the li if it is the correct answer
         let li = `li_${index}_${i}`;
         let r = `radio_${index}_${i}`;
@@ -76,15 +88,36 @@ window.addEventListener('DOMContentLoaded', () => {
 
         if (quizItem.a == i) {
           //change background color of li element here
+          liElement.style.backgroundColor = "green";
+          }
         }
 
         if (radioElement.checked) {
           // code for task 1 goes here
+          score +=1;
+          return score;
         }
-      }
     });
   };
-
+ 
   // call the displayQuiz function
   displayQuiz();
-});
+  });
+
+// 2. Add an Event listener for the submit button,
+  btnSubmit.addEventListener('click',calculateScore);
+
+// 4. Reload the page when the reset button is clicked (hint: search window.location)
+function reset (){
+  window.location.assign( href= "./index.html");
+}  
+btnReset.addEventListener('click',reset);
+
+// 5. Add a countdown timer
+window.onload = function() {
+  const fiveMinutes = 60 * 5; 
+  display = document.querySelector('#time');
+  startTimer (fiveMinutes, display);
+};
+
+  
