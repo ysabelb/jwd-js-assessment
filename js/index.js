@@ -26,6 +26,7 @@ window.addEventListener('DOMContentLoaded', () => {
     start.style.display = 'none';
   });
 
+
   // quizArray QUESTIONS & ANSWERS
   // q = QUESTION, o = OPTIONS, a = CORRECT ANSWER
   // Basic ideas from https://code-boxx.com/simple-javascript-quiz/
@@ -76,6 +77,7 @@ window.addEventListener('DOMContentLoaded', () => {
   };
 
   // 1. Calculate the score 
+  // Needs debuging. Total score is not adding up properly yet. 
   const calculateScore = () => {
     let score = 0;
     quizArray.map((quizItem, index) => {
@@ -94,30 +96,35 @@ window.addEventListener('DOMContentLoaded', () => {
 
         if (radioElement.checked) {
           // code for task 1 goes here
-          score +=1;
-          return score;
+          score += 1;
         }
     });
+    return score;
   };
+
+  function displayScore(totalScore){
+    totalScore = calculateScore();
+    return (score.innerHTML = `Your Total score is : ${totalScore}`);
+  }
+
+  // 2. Add an Event listener for the submit button,
+  const btnSubmit = document.querySelector("#btnSubmit");
+  btnSubmit.addEventListener('click',calculateScore);
+  btnSubmit.addEventListener('click',displayScore);
  
-  // call the displayQuiz function
+// call the displayQuiz function
   displayQuiz();
   });
 
-// 2. Add an Event listener for the submit button,
-  btnSubmit.addEventListener('click',calculateScore);
+  // 4. Reload the page when the reset button is clicked (hint: search window.location)
+  const btnReset = document.querySelector("#btnReset");
+  function reset (){
+    window.location.reload();
+  }  
+  btnReset.addEventListener('click',reset);
 
-// 4. Reload the page when the reset button is clicked (hint: search window.location)
-function reset (){
-  window.location.assign( href= "./index.html");
-}  
-btnReset.addEventListener('click',reset);
-
-// 5. Add a countdown timer
-window.onload = function() {
-  const fiveMinutes = 60 * 5; 
-  display = document.querySelector('#time');
-  startTimer (fiveMinutes, display);
-};
+  // 5. Add a countdown timer
+  // Function To be added 
+  
 
   
